@@ -1,6 +1,7 @@
 import React from 'react';
 import confetti from 'canvas-confetti';
 import { useState } from 'react'
+import { WinnerModal } from './components/WinnerModal';
 import { Square } from './components/Square';
 import './App.css'
 import {TURNS, WINNER_COMBOS} from './constants'
@@ -73,25 +74,7 @@ function App() {
           {TURNS.O}
         </Square>
       </section>
-      {
-        winner !== null  && (
-          <section className='winner'>
-            <div className="text">
-              <h2>
-                {
-                  winner === false ? 'Empate' : `The winner is`
-                }
-              </h2>
-              <header className="win">
-                {winner && <Square>{winner}</Square>}
-              </header>
-              <footer>
-                <button onClick={resetGame}>New game</button>
-              </footer>
-            </div>
-          </section>
-        )
-      }
+      <WinnerModal winner={winner} resetGame={resetGame}/>
     </main>
   )
 }
