@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { WinnerModal } from './components/WinnerModal';
 import { Square } from './components/Square';
 import './App.css'
-import {TURNS, WINNER_COMBOS} from './constants'
+import { checkWinner, checkEndGame } from './logic/ticTacToe';
+import { TURNS } from './constants'
 
 function App() {
   const emptyBoard = Array(9).fill(null)
@@ -25,28 +26,14 @@ function App() {
     if(newWinner){
       setWinner(newWinner)
       confetti()
-    }else if(newBoard.every(element => element !== null)){
+    }else if(checkEndGame(newBoard)){
       setWinner(false)
     }
-
   }
   const resetGame = ()=>{
     setBoard(emptyBoard)
     setTurn(TURNS.X)
     setWinner(null)
-  }
-
-  const checkWinner = (boardToCheck) =>{
-    for (const combo of WINNER_COMBOS){
-      const [a ,b ,c]= combo
-      if (boardToCheck[a] &&
-        boardToCheck[a]==boardToCheck[b] &&
-        boardToCheck[a] == boardToCheck[c]
-        ){
-        return boardToCheck[a]
-      }
-    }
-    return null
   }
 
   return (

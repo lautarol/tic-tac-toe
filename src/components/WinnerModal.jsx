@@ -21,6 +21,6 @@ export const WinnerModal = ({winner, resetGame})=>{
   )
 }
 WinnerModal.propTypes = {
-  winner: PropTypes.bool,
+  winner: PropTypes.string,
   resetGame: PropTypes.func
 }
